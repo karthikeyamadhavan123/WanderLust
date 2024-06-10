@@ -1,0 +1,40 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <h3>Edit your Listing</h3>
+    <form action="/listings/<%= id_listings._id %>?_method=put" method='post'>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" placeholder="enter title" value="<%= id_listings.title %>" class="form-control" required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="title" class="form-label">Description</label>
+            <textarea name="description" placeholder="enter description" class="form-control"><%= id_listings.description %></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">image</label>
+            <input type="text" name="image" placeholder="enter image/url-link" class="form-control">
+       
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" name="price" placeholder="enter price"  value="<%= id_listings.price %>" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" name="country" placeholder="enter country" value="<%= id_listings.country %>"  class="form-control"required>
+           
+        </div>
+        
+       
+        
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="location" placeholder="enter location" value="<%= id_listings.location %>">
+        </div>
+       
+        <br></br>
+        <button>Create Post</button>
+    </form>
+</body>
