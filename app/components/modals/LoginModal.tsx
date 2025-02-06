@@ -1,5 +1,4 @@
 "use client"
-import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
@@ -63,7 +62,7 @@ const LoginModal = () => {
             <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => signIn('github')} />
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center gap-2 justify-center">
-                    <div>Don't have an account?</div>
+                    <div>Don&apos;t have an account?</div>
                     <div className="text-neutral-800 cursor-pointer hover:underline" onClick={toggle}>Create an account</div>
                 </div>
             </div>

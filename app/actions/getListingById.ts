@@ -28,6 +28,6 @@ try {
         }
     }
 } catch (error:any) {
-    throw new Error(error)
+    throw new Error(error.message || "No listing found")
 }
 }

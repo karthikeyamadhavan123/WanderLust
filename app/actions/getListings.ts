@@ -13,7 +13,7 @@ export interface IlistingParams {
 export default async function getListings(params: IlistingParams) {
   try {
     const { userId, guestCount, roomCount, bathroomCount, startDate, endDate, locationValue, category } = await params
-    let query: any = {}
+    const query: any = {}
 
     if (userId) {
       query.userId = userId
@@ -71,6 +71,6 @@ export default async function getListings(params: IlistingParams) {
     }))
     return safeListings
   } catch (error: any) {
-    throw new Error(error)
+    throw new Error(error.message || "Failed to fetch listings")
   }
 }

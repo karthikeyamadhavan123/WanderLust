@@ -2,7 +2,6 @@
 import Container from "@/app/components/Container"
 import { categories } from "@/app/components/navbar/Categories"
 import { SafeListing, SafeReservation, SafeUser } from "@/app/types"
-import { Reservation } from "@prisma/client"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import ListingHead from "../../components/listings/ListingHead"
 import ListingInfo from "../../components/listings/ListingInfo"

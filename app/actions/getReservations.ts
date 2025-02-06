@@ -43,7 +43,7 @@ export default async function getReservations(params: Iparams) {
     }))
         return safereservations;
     } catch (error:any) {
-        throw new Error(error)
+        throw new Error(error.message ||"Failed to fetch reservations")
     }
   
 }

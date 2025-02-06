@@ -42,6 +42,8 @@ try {
     toast.success('Success')
 
 } catch (error) {
+    console.log(error);
+    
     toast.error('Something went wrong')
 }
 },[currentUser,hasFavorited,listingId,loginModal,router])

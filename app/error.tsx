@@ -5,6 +5,9 @@ interface ErrorProps{
     error:Error
 }
 const ErrorState:React.FC<ErrorProps> = ({error}) => {
+  useEffect(()=>{
+    console.error(error)
+  },[error])
   return (
   <EmptyState title="Uh Oh" subtitle="Something went wrong!"/>
   )

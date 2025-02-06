@@ -4,12 +4,15 @@ import Container from "../components/Container";
 import Heading from "../components/Heading";
 import { SafeUser, SafeListing } from "../types";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import ListingCard from "../components/listings/ListingCard";
 interface PropertiesProps {
     listings: SafeListing[]
     currentUser?: SafeUser | null
+}
+interface ErrorResponse {
+    error: string;
 }
 const PropertiesClient: React.FC<PropertiesProps> = ({ listings, currentUser }) => {
     const router = useRouter()
@@ -19,7 +22,7 @@ const PropertiesClient: React.FC<PropertiesProps> = ({ listings, currentUser }) 
         axios.delete(`/api/listings/${id}`).then(() => {
             toast.success('Listing Cancelled')
             router.refresh()
-        }).catch((error: any) => {
+        }).catch((error: AxiosError<ErrorResponse>) => {
             toast.error(error?.response?.data?.error)
         }).finally(() => {
             setdeletingid('')

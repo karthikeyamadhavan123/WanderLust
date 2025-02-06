@@ -14,7 +14,7 @@ export async function POST(request:Request,{params}:{params:Params}) {
     if(!listingId || typeof listingId !== 'string'){
         throw new Error("Invalid Id")
     }
-  let favoriteIds=[
+  const favoriteIds=[
     ...(currentUser.favoriteIds || [])
   ]
   favoriteIds.push(listingId)

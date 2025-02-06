@@ -4,12 +4,15 @@ import Container from "../components/Container";
 import Heading from "../components/Heading";
 import { SafeUser, SafeReservation } from "../types";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import ListingCard from "../components/listings/ListingCard";
 interface TripsProps {
     reservations: SafeReservation[]
     currentUser?: SafeUser | null
+}
+interface ErrorResponse {
+    error: string;
 }
 const TripsClient: React.FC<TripsProps> = ({ reservations, currentUser }) => {
     const router = useRouter()
@@ -19,7 +22,7 @@ const TripsClient: React.FC<TripsProps> = ({ reservations, currentUser }) => {
         axios.delete(`/api/reservations/${id}`).then(() => {
             toast.success('Reservations Cancelled')
             router.refresh()
-        }).catch((error: any) => {
+        }).catch((error: AxiosError<ErrorResponse>) => {
             toast.error(error?.response?.data?.error)
         }).finally(() => {
             setdeletingid('')

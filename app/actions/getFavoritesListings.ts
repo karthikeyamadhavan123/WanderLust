@@ -21,6 +21,6 @@ export default async function getFavoriteListings(){
         }))
         return safeFavorites
     } catch (error:any) {
-        throw new Error(error)
+        throw new Error(error.message || "Error fetching favorite listings")
     }
 }

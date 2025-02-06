@@ -1,5 +1,4 @@
 "use client"
-
 import { useCallback, useEffect, useState } from "react"
 import { IoMdClose } from "react-icons/io"
 import Button from "../Button"
@@ -70,7 +69,7 @@ ${showModal ? 'opacity-100' : 'opacity-0'}`}>
                         <div className="flex flex-row items-center gap-4 w-full">
                             {
                                 secondaryActionLabel && secondaryAction && (
-                                    <Button disabled={disabled} label={secondaryActionLabel} onClick={handleSubmit} outline />
+                                    <Button disabled={disabled} label={secondaryActionLabel} onClick={handleSecondaryAction} outline />
                                 )
                             }
 

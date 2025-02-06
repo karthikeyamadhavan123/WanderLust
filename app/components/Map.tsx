@@ -9,7 +9,7 @@ const markerIcon2x = "/markers/marker-icon-2x.png";
 const markerShadow = "/markers/marker-shadow.png";
 
 // Fix marker icons in Next.js
-// @ts-ignore
+// @ts-expect-error
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconUrl: markerIcon,
