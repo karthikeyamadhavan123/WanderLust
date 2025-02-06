@@ -53,6 +53,7 @@ const SearchModal = () => {
         if (params) {
             currentQuery = qs.parse(params.toString())
         }
+         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const updatedQuery: any = {
             ...currentQuery,
             locationValue: location?.value,

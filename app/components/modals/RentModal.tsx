@@ -94,7 +94,7 @@ const RentModal = () => {
     }),
     [location]
   );
-
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldDirty: true,

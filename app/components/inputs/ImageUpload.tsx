@@ -13,8 +13,9 @@ interface Props {
   onChange: (value: string) => void
   value: string
 }
-const ImageUpload: React.FC<Props> = ({ onChange, value }) => {
 
+const ImageUpload: React.FC<Props> = ({ onChange, value }) => {
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleUpload = useCallback((result: any) => {
     onChange(result.info.secure_url)
   }, [onChange])

@@ -1,5 +1,5 @@
 import prisma from '@/app/libs/prismadb';
-
+import { Prisma } from '@prisma/client';
 interface Iparams {
     listingId?: string;
     userId?: string;
@@ -10,7 +10,7 @@ export default async function getReservations(params: Iparams) {
     try {
         const { listingId, userId, authorId } = await params;
     
-        const query: any = {};  
+        const query: Prisma.ReservationWhereInput = {};  
     
         if (listingId) {
             query.listingId = listingId;
@@ -42,8 +42,12 @@ export default async function getReservations(params: Iparams) {
         }
     }))
         return safereservations;
-    } catch (error:any) {
-        throw new Error(error.message ||"Failed to fetch reservations")
-    }
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+          throw new Error(error.message || "Error fetching Reservations");
+        } else {
+          throw new Error("An unknown error occurred");
+        }
+      }
   
 }
