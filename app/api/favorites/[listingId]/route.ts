@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import getCurrentUser from '@/app/actions/getCurrentUser'
 
 
-export async function POST(request:Request,{params}:{params:{listingId?:string}}) {
+export async function POST(request:Request,{params}:{params:{listingId:string}}) {
     const currentUser=await getCurrentUser()
     if(!currentUser){
         return NextResponse.error()
@@ -32,7 +32,7 @@ export async function POST(request:Request,{params}:{params:{listingId?:string}}
 }
 
 
-export async function DELETE(request:Request,{params}:{params:{listingId?:string}}) {
+export async function DELETE(request:Request,{params}:{params:{listingId:string}}) {
     const currentUser=await getCurrentUser()
     if(!currentUser){
         return NextResponse.error()
