@@ -1,5 +1,6 @@
 
 import prisma from '@/app/libs/prismadb'
+import { Prisma } from '@prisma/client';
 export interface IlistingParams {
   userId?: string
   guestCount?: number
@@ -13,7 +14,7 @@ export interface IlistingParams {
 export default async function getListings(params: IlistingParams) {
   try {
     const { userId, guestCount, roomCount, bathroomCount, startDate, endDate, locationValue, category } = await params
-    const query: any = {}
+    const query: Prisma.ListingWhereInput = {};
 
     if (userId) {
       query.userId = userId
@@ -70,7 +71,11 @@ export default async function getListings(params: IlistingParams) {
       createdAt: listing.createdAt.toISOString()
     }))
     return safeListings
-  } catch (error: any) {
-    throw new Error(error.message || "Failed to fetch listings")
+  }catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message || "Error fetching  listings");
+    } else {
+      throw new Error("An unknown error occurred");
+    }
   }
 }

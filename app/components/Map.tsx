@@ -9,7 +9,7 @@ const markerIcon2x = "/markers/marker-icon-2x.png";
 const markerShadow = "/markers/marker-shadow.png";
 
 // Fix marker icons in Next.js
-// @ts-expect-error
+// @ts-expect-error: Leaflet's _getIconUrl is a private method, and TypeScript will throw an error if we try to access it. This is a workaround to override the default icon URLs.
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconUrl: markerIcon,

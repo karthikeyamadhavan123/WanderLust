@@ -27,7 +27,11 @@ try {
             emailVerified:listing.user.emailVerified?.toISOString() || null,
         }
     }
-} catch (error:any) {
-    throw new Error(error.message || "No listing found")
-}
+} catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message || "Error fetching  listings");
+    } else {
+      throw new Error("An unknown error occurred");
+    }
+  }
 }
