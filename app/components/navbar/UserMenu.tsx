@@ -56,9 +56,9 @@ const router = useRouter()
                                 </>
                             ) : <>
                                 <MenuItem onClick={() => router.push('/trips')} label="My Trips" />
-                                <MenuItem onClick={() => { }} label="My Favorites" />
+                                <MenuItem onClick={() =>router.push('/favorites')} label="My Favorites" />
                                 <MenuItem onClick={() => router.push('/reservations')} label="My Reservations"/>
-                                <MenuItem onClick={() => { }} label="My Properties" />
+                                <MenuItem onClick={() => router.push('properties')} label="My Properties" />
                                 <MenuItem onClick={onRent} label="Wander Your Home" />
                                 <hr />
                                 <MenuItem onClick={() => signOut()} label="Log Out" />

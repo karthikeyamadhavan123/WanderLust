@@ -14,7 +14,7 @@ export async function POST(request: Request) {
         return NextResponse.error()
     }
 
-    const ListingRservation = await prisma.listing.update({
+    const ListingResrvation = await prisma.listing.update({
         where: {
             id: listingId
         },
@@ -30,6 +30,6 @@ export async function POST(request: Request) {
 
         }
     })
-    return NextResponse.json(ListingRservation)
+    return NextResponse.json(ListingResrvation)
 
 }

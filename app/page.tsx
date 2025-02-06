@@ -1,19 +1,22 @@
 import ListingCard from "./components/listings/ListingCard";
-import getListings from "./actions/getListings";
+import getListings, { IlistingParams } from "./actions/getListings";
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 import getCurrentUser from "./actions/getCurrentUser";
-export default async function Home() {
-  const listings = await getListings()
+interface Props {
+  searchParams: IlistingParams
+}
+const Home:React.FC<Props> = async ({searchParams}:Props) => {
+  const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
   if (listings.length === 0) {
-    return(
+    return (
       <ClientOnly>
-      <EmptyState showReset />
-    </ClientOnly>
+        <EmptyState showReset />
+      </ClientOnly>
     )
-    
+
 
   }
   return (
@@ -21,13 +24,15 @@ export default async function Home() {
       <Container>
         <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
         xl:grid-cols-5 2xl:grid-cols-6 gap-8 pl-7">
-        {
-          listings.map((listing)=>(
-            <ListingCard key={listing.id} data={listing} currentUser={currentUser}/>
-          ))
-        }
+          {
+            listings.map((listing) => (
+              <ListingCard key={listing.id} data={listing} currentUser={currentUser} />
+            ))
+          }
         </div>
       </Container>
     </ClientOnly>
   );
 }
+
+export default Home
