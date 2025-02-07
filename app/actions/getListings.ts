@@ -1,4 +1,3 @@
-
 import prisma from '@/app/libs/prismadb'
 import { Prisma } from '@prisma/client';
 export interface IlistingParams {
@@ -13,7 +12,7 @@ export interface IlistingParams {
 }
 export default async function getListings(params: IlistingParams) {
   try {
-    const { userId, guestCount, roomCount, bathroomCount, startDate, endDate, locationValue, category } = await params
+    const { userId, guestCount, roomCount, bathroomCount, startDate, endDate, locationValue, category } =  params
     const query: Prisma.ListingWhereInput = {};
 
     if (userId) {

@@ -8,7 +8,7 @@ interface Iparams {
 
 export default async function getReservations(params: Iparams) {
     try {
-        const { listingId, userId, authorId } = await params;
+        const { listingId, userId, authorId } =  params;
     
         const query: Prisma.ReservationWhereInput = {};  
     

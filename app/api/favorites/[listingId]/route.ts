@@ -1,32 +1,29 @@
 import prisma from '@/app/libs/prismadb';
 import { NextResponse } from 'next/server';
 import getCurrentUser from '@/app/actions/getCurrentUser';
-
+interface Iparams{
+  listingId?:string
+}
 export async function POST(
   request: Request,
-  { params }: { params: { listingId: string } } // Correctly access params
+  {params}:{params:Iparams} // Make params a Promise
 ) {
+  const { listingId } =  params; // Await params before accessing listingId
+
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     return NextResponse.error();
   }
 
-  const { listingId } = params; // Access listingId directly from params (no await needed)
-
   if (!listingId || typeof listingId !== 'string') {
     throw new Error('Invalid ID');
   }
 
-  const favoriteIds = [...(currentUser.favoriteIds || [])];
-  favoriteIds.push(listingId);
+  const favoriteIds = [...(currentUser.favoriteIds || []), listingId];
 
   const user = await prisma.user.update({
-    where: {
-      id: currentUser.id,
-    },
-    data: {
-      favoriteIds: favoriteIds,
-    },
+    where: { id: currentUser.id },
+    data: { favoriteIds },
   });
 
   return NextResponse.json(user);
@@ -34,29 +31,26 @@ export async function POST(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { listingId: string } } // Correctly access params
+  { params }: { params: Iparams }  // Make params a Promise
 ) {
+  const { listingId } =  params; // Await params before accessing listingId
+
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     return NextResponse.error();
   }
 
-  const { listingId } = params; // Access listingId directly from params (no await needed)
-
   if (!listingId || typeof listingId !== 'string') {
     throw new Error('Invalid ID');
   }
 
-  let favoriteIds = [...(currentUser.favoriteIds || [])];
-  favoriteIds = favoriteIds.filter((id) => id !== listingId);
+  const favoriteIds = (currentUser.favoriteIds || []).filter(
+    (id) => id !== listingId
+  );
 
   const user = await prisma.user.update({
-    where: {
-      id: currentUser.id,
-    },
-    data: {
-      favoriteIds: favoriteIds,
-    },
+    where: { id: currentUser.id },
+    data: { favoriteIds },
   });
 
   return NextResponse.json(user);

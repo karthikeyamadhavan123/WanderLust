@@ -10,7 +10,7 @@ export async function DELETE(request:Request,{params}:{params:Iparams}) {
     if(!currentUser){
         return NextResponse.error()
     }
-   const {listingId}= await params
+   const {listingId}=  params
    if(!listingId || typeof listingId !=="string"){
     throw new Error("Invalid Id")
    }
