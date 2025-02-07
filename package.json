@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
      "dev": "next dev --ignore-ts-errors",
-  "build": "next build --ignore-ts-errors",
+    "build": "next build --ignore-ts-errors",
     "start": "next start",
     "lint": "next lint"
   },
