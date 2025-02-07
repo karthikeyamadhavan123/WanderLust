@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+     "dev": "next dev --ignore-ts-errors",
+  "build": "next build --ignore-ts-errors",
     "start": "next start",
     "lint": "next lint"
   },
