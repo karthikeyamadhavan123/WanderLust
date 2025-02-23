@@ -8,20 +8,28 @@ interface IParams {
 
 export async function POST(
   request: Request,
-  { params }: { params: IParams } // Correctly destructure params
+  context: { params: Promise<IParams> } // Wrap params in a Promise
 ) {
-  const { listingId } = params; // No need to await params
-
   const currentUser = await getCurrentUser();
+
   if (!currentUser) {
-    return NextResponse.error();
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+  // Await the params promise
+  const { listingId } = await context.params;
 
   if (!listingId || typeof listingId !== 'string') {
-    throw new Error('Invalid ID');
+    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
   }
 
-  const favoriteIds = [...(currentUser.favoriteIds || []), listingId];
+  // Ensure favoriteIds is always an array
+  const favoriteIds = [...(currentUser.favoriteIds || [])];
+
+  // Avoid duplicate IDs
+  if (!favoriteIds.includes(listingId)) {
+    favoriteIds.push(listingId);
+  }
 
   const user = await prisma.user.update({
     where: { id: currentUser.id },
@@ -33,19 +41,22 @@ export async function POST(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: IParams } // Correctly destructure params
+  context: { params: Promise<IParams> } // Wrap params in a Promise
 ) {
-  const { listingId } = params; // No need to await params
-
   const currentUser = await getCurrentUser();
+
   if (!currentUser) {
-    return NextResponse.error();
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+  // Await the params promise
+  const { listingId } = await context.params;
 
   if (!listingId || typeof listingId !== 'string') {
-    throw new Error('Invalid ID');
+    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
   }
 
+  // Ensure favoriteIds is always an array
   const favoriteIds = (currentUser.favoriteIds || []).filter(
     (id) => id !== listingId
   );

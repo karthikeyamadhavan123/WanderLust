@@ -5,10 +5,11 @@ import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 import getCurrentUser from "./actions/getCurrentUser";
 interface Props {
-  searchParams: IlistingParams
+  searchParams: Promise<IlistingParams>
 }
 const Home:React.FC<Props> = async ({searchParams}:Props) => {
-  const listings = await getListings(searchParams)
+  const resolvedSearchParams = await searchParams;
+  const listings = await getListings(resolvedSearchParams)
   const currentUser = await getCurrentUser()
   if (listings.length === 0) {
     return (

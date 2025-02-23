@@ -5,12 +5,12 @@ import getCurrentUser from '@/app/actions/getCurrentUser'
 interface Iparams{
     reservationId?:string
 }
-export async function DELETE(request: Request,{params}:{params:Iparams}) {
+export async function DELETE(request: Request,context:{params:Promise<Iparams>}) {
     const currentUser = await getCurrentUser()
     if (!currentUser) {
         return NextResponse.error()
     }
-    const {reservationId} =  params
+    const {reservationId} =  await context.params
 
     if (!reservationId) {
         throw new Error("Invalid Id")

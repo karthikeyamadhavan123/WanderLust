@@ -7,7 +7,8 @@ import getReservations from "@/app/actions/getReservations";
 interface Iparams{
     listingId?:string
 }
-const ListingPage = async({params}:{params:Iparams}) => {
+const ListingPage = async(context:{params:Promise<Iparams>}) => {
+    const params = await context.params
     const listing = await getListingById(params)
     const currentUser = await getCurrentUser()
     const reservations=await getReservations(params)
