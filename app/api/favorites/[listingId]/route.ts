@@ -1,14 +1,16 @@
 import prisma from '@/app/libs/prismadb';
 import { NextResponse } from 'next/server';
 import getCurrentUser from '@/app/actions/getCurrentUser';
-interface Iparams{
-  listingId?:string
+
+interface IParams {
+  listingId?: string;
 }
+
 export async function POST(
   request: Request,
-  {params}:{params:Iparams} // Make params a Promise
+  { params }: { params: IParams } // Correctly destructure params
 ) {
-  const { listingId } =  params; // Await params before accessing listingId
+  const { listingId } = params; // No need to await params
 
   const currentUser = await getCurrentUser();
   if (!currentUser) {
@@ -31,9 +33,9 @@ export async function POST(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Iparams }  // Make params a Promise
+  { params }: { params: IParams } // Correctly destructure params
 ) {
-  const { listingId } =  params; // Await params before accessing listingId
+  const { listingId } = params; // No need to await params
 
   const currentUser = await getCurrentUser();
   if (!currentUser) {
@@ -55,4 +57,3 @@ export async function DELETE(
 
   return NextResponse.json(user);
 }
-
