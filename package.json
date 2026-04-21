@@ -16,7 +16,7 @@
     "bcrypt": "^5.1.1",
     "date-fns": "^4.1.0",
     "leaflet": "^1.9.4",
-    "next": "15.1.6",
+    "next": "15.1.11",
     "next-auth": "^4.24.11",
     "next-cloudinary": "^6.16.0",
     "query-string": "^9.1.1",
